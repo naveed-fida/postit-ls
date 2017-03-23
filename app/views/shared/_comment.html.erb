@@ -1,0 +1,26 @@
+<div class="row">
+  <% show_post ||= false %>
+  <% if logged_in? %>
+    <div class="span0 well">
+      <%= link_to vote_comment_path(comment, vote: true), method: 'post', remote: true do %>
+        <i class="icon icon-arrow-up"></i>
+      <% end %>
+      <br>
+      <strong class="comment_<%= comment.id %>_votes"><%= comment.net_votes %> votes</strong>
+      <br>
+      <%= link_to vote_comment_path(comment, vote: false), method: 'post', remote: true do %>
+        <i class="icon icon-arrow-down"></i>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="well span8">
+    <em>"<%= comment.body %>"</em>
+    <br>
+    <span class="quiet">posted by <%= comment.creator.username %>
+    <% if show_post %>
+      on <%= link_to comment.post.title, post_path(comment.post) %>
+    <% end %>
+    </span>
+    <small>at: <%= comment.created_at %></small>
+  </div>
+</div>

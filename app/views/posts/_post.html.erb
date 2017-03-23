@@ -1,0 +1,29 @@
+  <div class="row">
+    <% if logged_in? %>
+      <div class="span0 well">
+        <%= link_to vote_post_path(post, vote: true), method: 'post', remote: true do %>
+          <i class="icon icon-arrow-up"></i>
+        <% end %>
+        <br>
+        <strong class="post_<%= post.slug %>_votes"><%= post.net_votes %> votes</strong>
+        <br>
+        <%= link_to vote_post_path(post, vote: false), method: 'post', remote: true do %>
+          <i class="icon icon-arrow-down"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="span8 well">
+      <%= render post.categories %>
+      <h4><%= link_to post.title, fix_url(post.url) %></h4>
+      <p><%= post.description %></p>
+      <p>
+        <span class="quiet">posted by <%= post.creator.username if post.creator %></span>
+        <small>at: <%= format_date post.created_at %></small>
+      </p>
+      <small>
+        <span>
+          <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+        </span>
+      </small>
+    </div>
+  </div>

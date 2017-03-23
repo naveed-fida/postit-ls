@@ -1,0 +1,30 @@
+<% if admin_or_creator? %>
+  <p class="pull-right">
+    [<%= link_to 'Edit this post', edit_post_path(@post) %>]
+  </p>
+<% end %>
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<p>
+  <%= @post.description %>
+  <hr>
+</p>
+
+
+<% if current_user %>
+  <%= render 'shared/errors', obj: @comment %>
+  <%= form_for [@post, @comment] do |f|%>
+    <div class="control-group">
+      <%= f.label :body, 'Leave a comment' %>
+      <%= f.text_area :body, rows: 4, class: 'span4' %>
+    </div>
+    <%= f.submit 'Create Comment', class: 'btn btn-primary'%>
+  <% end %>
+<% end %>
+
+<div class="row">
+<% @post.comments.each do |comment| %>
+  <%= render 'shared/comment', comment: comment %>
+<% end %>
+</div>

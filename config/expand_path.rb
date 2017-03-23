@@ -1,0 +1,1 @@
+puts File.expand_path("../cmd_play", __dir__)
