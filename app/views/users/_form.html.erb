@@ -9,5 +9,10 @@
     <%= f.password_field :password %>
   </div>
 
+  <div class="control-group">
+    <%= f.label :phone %>
+    <%= f.telephone_field :phone %>
+  </div>
+
   <%= f.submit user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success' %>
 <% end %>

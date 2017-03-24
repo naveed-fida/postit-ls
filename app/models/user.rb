@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, on: :create, length: { minimum: 5 }
+  validates :phone, uniqueness: true, length: {minimum: 10, maximum: 10}
 
   def admin?
     role == 'admin'
@@ -17,5 +18,23 @@ class User < ActiveRecord::Base
 
   def moderator?
     role == 'moderator'
+  end
+
+  def generate_pin!
+    update_column(:pin, rand(10 ** 6))
+  end
+
+  def two_factor_auth?
+    !phone.blank?
+  end
+
+  def obscured_phone
+    obs = phone.strip
+    obs[2..-3] = '*' * 6
+    obs
+  end
+
+  def remove_pin!
+    update_column(:pin, nil)
   end
 end

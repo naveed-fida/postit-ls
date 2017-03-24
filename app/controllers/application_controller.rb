@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def access_denied
-    flash[:notice] = 'You do not have the privilige to do that'
+    flash[:error] = 'You do not have the privilige to do that'
     redirect_to root_path
   end
 end
