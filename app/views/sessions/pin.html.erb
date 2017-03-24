@@ -1,0 +1,9 @@
+<%= render 'shared/content_title', title: "Enter PIN number sent to your phone: #{@obscured_phone}"  %>
+
+<%= form_tag pin_path do %>
+  <div class="control_group">
+      <%= label_tag :pin, 'PIN number' %>
+      <%= text_field_tag :pin %>
+  </div>
+  <%= submit_tag 'Enter', class: 'btn btn-success' %>
+<% end  %>
