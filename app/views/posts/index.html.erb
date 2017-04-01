@@ -3,3 +3,17 @@
 <% @posts.each do |post| %>
 <%= render 'post', post: post %>
 <% end %>
+
+<% @num_pages.times do |n| %>
+  <% offset = n * Post::PER_PAGE %>
+  <% if offset == params[:offset].to_i  %>
+    <span>Page <%= n + 1 %></span> |
+  <% else %>
+    <%= link_to "Page #{n + 1}", posts_path(offset: offset) %> |
+  <% end %>
+<% end %>
+<!-- <% counter = 0 %> -->
+<!-- <% (0..Post.count).step(3) do |offset| %>
+<%= class_name = "current_page" if offset == params[:offset] %>
+<%= link_to counter += 1, posts_path(offset: offset), class: class_name %>
+<% end %> -->

@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   helper_method :admin_or_creator
 
   def index
-    @posts = Post.all
+    @posts = Post.limit(Post::PER_PAGE).offset(params[:offset])
+    @num_pages = (Post.count / Post::PER_PAGE.to_f).ceil
   end
 
   def show
